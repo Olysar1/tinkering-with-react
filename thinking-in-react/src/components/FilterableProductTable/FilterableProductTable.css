@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 0 55vh 0 55vh;
+  height: 100vh;
+}
