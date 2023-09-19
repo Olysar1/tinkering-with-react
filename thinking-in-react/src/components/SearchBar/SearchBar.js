@@ -1,12 +1,26 @@
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange,
+}) => {
   return (
     <>
       <form className="search-bar">
-        <input type="text" placeholder="search..." />
+        <input
+          type="text"
+          value={filterText}
+          placeholder="search..."
+          onChange={(e) => onFilterTextChange(e.target.value)}
+        />
         <label>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={inStockOnly}
+            onChange={(e) => onInStockOnlyChange(e.target.checked)}
+          />
           Only show products in stock
         </label>
       </form>
