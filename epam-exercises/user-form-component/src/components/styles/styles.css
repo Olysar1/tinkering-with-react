@@ -1,0 +1,38 @@
+.form-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input {
+  width: 70%;
+  padding: 4px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.form-list-wrapper {
+  justify-content: flex-start;
+  gap: 10%;
+}
+
+.form-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-list-item {
+  display: flex;
+  gap: 5px;
+}
+
+.textarea {
+  justify-content: flex-start;
+  gap: 20%;
+}
+
+textarea {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  width: 100%;
+}
