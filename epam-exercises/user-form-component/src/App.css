@@ -17,3 +17,10 @@ form {
   border: 1px solid lightgray;
   border-radius: 3px;
 }
+
+.json-layout {
+  background-color: lightgray;
+  border-radius: 1px;
+  padding: 20px;
+  white-space: pre-wrap;
+}
