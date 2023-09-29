@@ -57,6 +57,10 @@ function App() {
     });
   };
 
+  const handleStooge = (e: ChangeEvent<HTMLInputElement>) => {
+    setStooge(e.target.value);
+  };
+
   return (
     <div className="App">
       <form>
@@ -85,7 +89,10 @@ function App() {
           sauces={["Ketchup", "Mustard", "Mayonnaise", "Guacamole"]}
           eventHandler={handleSauces}
         />
-        <RadioComponent />
+        <RadioComponent
+          stooges={["Larry", "Moe", "Curly"]}
+          eventHandler={handleStooge}
+        />
         <TextareaComponent />
       </form>
       <div className="json-layout">{JSON.stringify(jsonObject, null, 7)}</div>
