@@ -23,7 +23,7 @@ function App() {
     ...(firstName && { name: firstName }),
     ...(lastName && { lastName }),
     ...(age && { age: age }),
-    ...(sauces && { sauces }),
+    ...(sauces.length !== 0 && { sauces }),
     ...(notes && { notes }),
   };
 
@@ -39,11 +39,23 @@ function App() {
     setAge(e.target.value);
   };
 
-  const handleEmployed = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleEmployed = (): void => {
     setEmployed(!emplayed);
   };
 
-  // const handleFavColor = ()
+  const handleFavColor = (e: ChangeEvent<HTMLSelectElement>): void => {
+    setFavColor(e.target.value);
+  };
+
+  const handleSauces = (sauce: string): void => {
+    setSauces((prevSauces: string[]): string[] => {
+      const result = prevSauces.includes(sauce)
+        ? prevSauces.filter((item) => item !== sauce)
+        : [...sauces, sauce];
+
+      return result;
+    });
+  };
 
   return (
     <div className="App">
@@ -68,9 +80,10 @@ function App() {
           inputType={"checkbox"}
           eventHandler={handleEmployed}
         />
-        <SelectComponent x={""} />
+        <SelectComponent eventHandler={handleFavColor} />
         <CheckboxComponent
           sauces={["Ketchup", "Mustard", "Mayonnaise", "Guacamole"]}
+          eventHandler={handleSauces}
         />
         <RadioComponent />
         <TextareaComponent />

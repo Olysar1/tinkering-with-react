@@ -1,11 +1,15 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import "./styles/styles.css";
 
 interface CheckboxComponentProps {
   sauces: string[];
+  eventHandler: (sauce: string) => void;
 }
 
-const CheckboxComponent: React.FC<CheckboxComponentProps> = ({ sauces }) => {
+const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
+  sauces,
+  eventHandler,
+}) => {
   return (
     <div className="form-item form-list-wrapper" style={{ gap: "18%" }}>
       <label>Sauces</label>
@@ -13,7 +17,10 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({ sauces }) => {
         {sauces.map((sauce) => {
           return (
             <div key={sauce} className="form-list-item">
-              <input type="checkbox"></input>
+              <input
+                onClick={() => eventHandler(sauce)}
+                type="checkbox"
+              ></input>
               <label>{sauce}</label>
             </div>
           );

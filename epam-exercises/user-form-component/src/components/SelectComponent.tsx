@@ -1,15 +1,20 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import "./styles/styles.css";
 
 interface SelectComponentProps {
-  x: string;
+  eventHandler: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectComponent: React.FC<SelectComponentProps> = ({}) => {
+const SelectComponent: React.FC<SelectComponentProps> = ({ eventHandler }) => {
   return (
     <div className="form-item">
       <label>Favorite Color</label>
-      <select name="colors" className="form-input" style={{ width: "72%" }}>
+      <select
+        onChange={eventHandler}
+        name="colors"
+        className="form-input"
+        style={{ width: "72%" }}
+      >
         <option></option>
         <option value={"punainen"}>Punainen</option>
         <option value={"vihreaä"}>Vihreä</option>
