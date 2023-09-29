@@ -2,14 +2,19 @@ import React, { ChangeEvent } from "react";
 import "./styles/styles.css";
 
 interface SelectComponentProps {
+  value: string;
   eventHandler: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectComponent: React.FC<SelectComponentProps> = ({ eventHandler }) => {
+const SelectComponent: React.FC<SelectComponentProps> = ({
+  value,
+  eventHandler,
+}) => {
   return (
     <div className="form-item">
       <label>Favorite Color</label>
       <select
+        value={value}
         onChange={eventHandler}
         name="colors"
         className="form-input"

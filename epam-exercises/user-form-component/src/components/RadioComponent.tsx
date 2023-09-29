@@ -1,12 +1,14 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { ChangeEvent } from "react";
 
 interface RadioComponentProps {
+  stateStooge: string;
   stooges: string[];
   eventHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const RadioComponent: React.FC<RadioComponentProps> = ({
+  stateStooge,
   stooges,
   eventHandler,
 }) => {
@@ -22,7 +24,8 @@ const RadioComponent: React.FC<RadioComponentProps> = ({
                 type="radio"
                 value={stooge}
                 onChange={eventHandler}
-                defaultChecked={stooge === "Larry"}
+                // defaultChecked={stooge === "Larry"}
+                checked={stooge === stateStooge}
               />
               <label>{stooge}</label>
             </div>

@@ -16,6 +16,17 @@ function App() {
   const [stooge, setStooge] = useState("Larry");
   const [notes, setNotes] = useState<string>("");
 
+  const handleReset = (): void => {
+    setFirstName("");
+    setLastName("");
+    setAge("");
+    setEmployed(false);
+    setFavColor("");
+    setSauces([]);
+    setStooge("Larry");
+    setNotes("");
+  };
+
   let jsonObject = {
     stooge,
     emplayed,
@@ -57,44 +68,65 @@ function App() {
     });
   };
 
-  const handleStooge = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleStooge = (e: ChangeEvent<HTMLInputElement>): void => {
     setStooge(e.target.value);
+  };
+
+  const handleNotes = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    setNotes(e.target.value);
   };
 
   return (
     <div className="App">
       <form>
         <InputComponent
+          value={firstName}
           title={"First Name"}
           inputType={"text"}
           eventHandler={handleFirstName}
         />
         <InputComponent
+          value={lastName}
           title={"Last Name"}
           inputType={"text"}
           eventHandler={handleLastName}
         />
         <InputComponent
+          value={age}
           title={"Age"}
           inputType={"text"}
           eventHandler={handleAge}
         />
         <InputComponent
+          value={emplayed}
           title={"Employed"}
           inputType={"checkbox"}
           eventHandler={handleEmployed}
         />
-        <SelectComponent eventHandler={handleFavColor} />
+        <SelectComponent value={favColor} eventHandler={handleFavColor} />
         <CheckboxComponent
+          stateSauces={sauces}
           sauces={["Ketchup", "Mustard", "Mayonnaise", "Guacamole"]}
           eventHandler={handleSauces}
         />
         <RadioComponent
+          stateStooge={stooge}
           stooges={["Larry", "Moe", "Curly"]}
           eventHandler={handleStooge}
         />
-        <TextareaComponent />
+        <TextareaComponent value={notes} eventHandler={handleNotes} />
       </form>
+      <div className="buttons-wrapper">
+        <button
+          className="button"
+          style={{ color: "white", backgroundColor: "#4267B2" }}
+        >
+          Submit
+        </button>
+        <button className="button" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
       <div className="json-layout">{JSON.stringify(jsonObject, null, 7)}</div>
     </div>
   );

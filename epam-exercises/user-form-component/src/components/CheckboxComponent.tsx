@@ -1,12 +1,14 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import "./styles/styles.css";
 
 interface CheckboxComponentProps {
+  stateSauces: string[];
   sauces: string[];
   eventHandler: (sauce: string) => void;
 }
 
 const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
+  stateSauces,
   sauces,
   eventHandler,
 }) => {
@@ -18,6 +20,7 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
           return (
             <div key={sauce} className="form-list-item">
               <input
+                checked={stateSauces.includes(sauce)}
                 onClick={() => eventHandler(sauce)}
                 type="checkbox"
               ></input>
