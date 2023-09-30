@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import "./styles/styles.css";
 
 interface InputComponentProps {
+  isValid?: boolean;
   value: string | boolean;
   title: string;
   inputType: string;
@@ -9,6 +10,7 @@ interface InputComponentProps {
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
+  isValid,
   value,
   title,
   inputType,
@@ -18,6 +20,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
     <div className="form-item">
       <label>{title}</label>
       <input
+        style={{ borderColor: !isValid ? "red" : "" }}
         checked={value === true}
         value={value.toString()}
         className="form-input"

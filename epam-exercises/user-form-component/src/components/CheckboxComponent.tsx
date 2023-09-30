@@ -21,7 +21,7 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
             <div key={sauce} className="form-list-item">
               <input
                 checked={stateSauces.includes(sauce)}
-                onClick={() => eventHandler(sauce)}
+                onChange={() => eventHandler(sauce)}
                 type="checkbox"
               ></input>
               <label>{sauce}</label>

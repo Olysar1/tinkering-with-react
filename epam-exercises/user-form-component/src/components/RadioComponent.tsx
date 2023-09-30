@@ -24,7 +24,6 @@ const RadioComponent: React.FC<RadioComponentProps> = ({
                 type="radio"
                 value={stooge}
                 onChange={eventHandler}
-                // defaultChecked={stooge === "Larry"}
                 checked={stooge === stateStooge}
               />
               <label>{stooge}</label>

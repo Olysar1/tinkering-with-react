@@ -23,6 +23,7 @@ form {
   border-radius: 1px;
   padding: 20px;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .buttons-wrapper {
