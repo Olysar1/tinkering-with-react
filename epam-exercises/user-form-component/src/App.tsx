@@ -6,6 +6,7 @@ import RadioComponent from "./components/RadioComponent";
 import CheckboxComponent from "./components/CheckboxComponent";
 import TextareaComponent from "./components/TextareaComponent";
 import { validate } from "./utils/validate";
+import { useUserInput } from "./hooks/useUserInput";
 
 function App() {
   interface User {
@@ -26,14 +27,14 @@ function App() {
   const [isValidNote, setIsValidNote] = useState<boolean>(true);
 
   //USER INPUT STATES:
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [age, setAge] = useState<string>("");
+  const firstName = useUserInput();
+  const lastName = useUserInput();
+  const age = useUserInput();
+  const stooge = useUserInput();
+  const [notes, setNotes] = useState<string>("");
   const [employed, setEmployed] = useState<boolean>(false);
   const [favColor, setFavColor] = useState<string>("");
   const [sauces, setSauces] = useState<string[]>([]);
-  const [stooge, setStooge] = useState("Larry");
-  const [notes, setNotes] = useState<string>("");
 
   const initialState = {
     stooge: "Larry",
@@ -41,12 +42,12 @@ function App() {
   };
 
   let userObject = {
-    stooge,
+    stooge: stooge.value,
     employed,
     ...(favColor && { favoriteColor: favColor }),
-    ...(firstName && { firstName }),
-    ...(lastName && { lastName }),
-    ...(age && { age: age }),
+    ...(firstName.value && { firstName: firstName.value }),
+    ...(lastName.value && { lastName: lastName.value }),
+    ...(age.value && { age: age.value }),
     ...(sauces.length !== 0 && { sauces }),
     ...(notes && { notes }),
   };
@@ -61,13 +62,13 @@ function App() {
   }, [user]);
 
   const handleReset = (): void => {
-    setFirstName("");
-    setLastName("");
-    setAge("");
+    firstName.resetInput();
+    lastName.resetInput();
+    age.resetInput();
+    stooge.resetInput("Larry");
     setEmployed(false);
     setFavColor("");
     setSauces([]);
-    setStooge("Larry");
     setNotes("");
 
     setIsValidFirstName(true);
@@ -79,15 +80,15 @@ function App() {
   const handleSubmit = (userData: User): void => {
     let validationFailed = false;
     //validations
-    if (!validate("firstName", firstName)) {
+    if (!validate("firstName", firstName.value)) {
       setIsValidFirstName(false);
       validationFailed = true;
     }
-    if (!validate("lastName", lastName)) {
+    if (!validate("lastName", lastName.value)) {
       setIsValidLastName(false);
       validationFailed = true;
     }
-    if (!validate("age", age)) {
+    if (!validate("age", age.value)) {
       setIsValidAge(false);
       validationFailed = true;
     }
@@ -102,21 +103,7 @@ function App() {
     setUser(userData);
   };
 
-  const handleFirstName = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (!isValidFirstName) setIsValidFirstName(true);
-    setFirstName(e.target.value);
-  };
-
-  const handleLastName = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (!isValidLastName) setIsValidLastName(true);
-    setLastName(e.target.value);
-  };
-
-  const handleAge = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (!isValidAge) setIsValidAge(true);
-    setAge(e.target.value);
-  };
-
+  // event handlers
   const handleEmployed = (): void => {
     setEmployed(!employed);
   };
@@ -135,10 +122,6 @@ function App() {
     });
   };
 
-  const handleStooge = (e: ChangeEvent<HTMLInputElement>): void => {
-    setStooge(e.target.value);
-  };
-
   const handleNotes = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setNotes(e.target.value);
   };
@@ -148,24 +131,24 @@ function App() {
       <form>
         <InputComponent
           isValid={isValidFirstName}
-          value={firstName}
+          value={firstName.value}
           title={"First Name"}
           inputType={"text"}
-          eventHandler={handleFirstName}
+          eventHandler={firstName.onChange}
         />
         <InputComponent
           isValid={isValidLastName}
-          value={lastName}
+          value={lastName.value}
           title={"Last Name"}
           inputType={"text"}
-          eventHandler={handleLastName}
+          eventHandler={lastName.onChange}
         />
         <InputComponent
           isValid={isValidAge}
-          value={age}
+          value={age.value}
           title={"Age"}
           inputType={"text"}
-          eventHandler={handleAge}
+          eventHandler={age.onChange}
         />
         <InputComponent
           value={employed}
@@ -180,9 +163,9 @@ function App() {
           eventHandler={handleSauces}
         />
         <RadioComponent
-          stateStooge={stooge}
+          stateStooge={stooge.value}
           stooges={["Larry", "Moe", "Curly"]}
-          eventHandler={handleStooge}
+          eventHandler={stooge.onChange}
         />
         <TextareaComponent
           isValid={isValidNote}
